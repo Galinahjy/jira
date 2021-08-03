@@ -1,6 +1,20 @@
 import React, { useState } from "react";
 
-export const SearchPanel = ({ params, setParams, users }) => {
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  title: string;
+  organization: string;
+}
+
+interface SearchPanelProps {
+  params: { name: string; personId: string };
+  setParams: (params: SearchPanelProps["params"]) => void;
+  users: User[];
+}
+
+export const SearchPanel = ({ params, setParams, users }: SearchPanelProps) => {
   // setParams(Object.assign({}, params, { name: EventTarget.target.value }));
   return (
     <form>
@@ -11,7 +25,7 @@ export const SearchPanel = ({ params, setParams, users }) => {
           onChange={(evt) =>
             setParams({
               ...params,
-              name: evt.target.value
+              name: evt.target.value,
             })
           }
         />
@@ -20,7 +34,7 @@ export const SearchPanel = ({ params, setParams, users }) => {
           onChange={(evt) =>
             setParams({
               ...params,
-              personId: evt.target.value
+              personId: evt.target.value,
             })
           }
         >
