@@ -19,6 +19,7 @@ const bootstrapUser = async () => {
   return user;
 };
 
+// 创建context
 export const AuthContext = React.createContext<
   | {
       user: User | null;
@@ -38,6 +39,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const register = (form: AuthForm) => auth.register(form).then(setUser);
   const logout = () => auth.logout().then(() => setUser(null));
 
+  // 初始user
   useMount(() => {
     bootstrapUser().then(setUser);
   });
@@ -50,6 +52,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
+// useAuth hook
 export const useAuth = () => {
   const context = React.useContext(AuthContext);
   if (!context) {
